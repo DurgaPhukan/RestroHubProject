@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <title>PAYMENT_GATEWAY</title>
+   
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.8.1/css/all.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+.container {
+    margin: 30px auto
+}
+
+.container .card {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background: #fff;
+    border-radius: 0px
+}
+
+body {
+    background: #eee
+}
+
+.btn.btn-primary {
+    background-color: #ddd;
+    color: black;
+    box-shadow: none;
+    border: none;
+    font-size: 20px;
+    width: 100%;
+    height: 100%
+}
+
+.btn.btn-primary:focus {
+    box-shadow: none
+}
+
+.container .card .img-box {
+    width: 80px;
+    height: 50px
+}
+
+.container .card img {
+    width: 100%;
+    object-fit: fill
+}
+
+.container .card .number {
+    font-size: 24px
+}
+
+.container .card-body .btn.btn-primary .fab.fa-cc-paypal {
+    font-size: 32px;
+    color: #3333f7
+}
+
+.fab.fa-cc-amex {
+    color: #1c6acf;
+    font-size: 32px
+}
+
+.fab.fa-cc-mastercard {
+    font-size: 32px;
+    color: red
+}
+
+.fab.fa-cc-discover {
+    font-size: 32px;
+    color: orange
+}
+
+.c-green {
+    color: green
+}
+
+.box {
+    height: 40px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd
+}
+
+
+.form__div {
+    height: 50px;
+    position: relative;
+    margin-bottom: 24px
+}
+
+.form-control {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    border: 1px solid #DADCE0;
+    border-radius: 0;
+    outline: none;
+    padding: 2px;
+    background: none;
+    z-index: 1;
+    box-shadow: none
+}
+
+.form__label {
+    position: absolute;
+    left: 16px;
+    top: 10px;
+    background-color: #fff;
+    color: #80868B;
+    font-size: 16px;
+    transition: .3s;
+    text-transform: uppercase
+}
+
+.form-control:focus+.form__label {
+    top: -8px;
+    left: 12px;
+    color: #1A73E8;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 10
+}
+
+.form-control:not(:placeholder-shown).form-control:not(:focus)+.form__label {
+    top: -8px;
+    left: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    z-index: 10
+}
+
+.form-control:focus {
+    border: 1.5px solid #1A73E8;
+    box-shadow: none
+}
+
+body {
+    background: #f5f5f5
+}
+
+.rounded {
+    border-radius: 1rem
+}
+
+.nav-pills .nav-link {
+    color: #555
+}
+
+.nav-pills .nav-link.active {
+    color: white
+}
+
+input[type="radio"] {
+    margin-right: 5px
+}
+
+.bold {
+    font-weight: bold
+}
+
+
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box"> <img src="https://www.freepnglogos.com/uploads/visa-logo-download-png-21.png"
+                            alt=""> </div>
+                    <div class="number"> <label class="fw-bold" for="">**** **** **** 1060</label> </div>
+                    <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry
+                                date:</span><span>10/16</span></small> <small><span
+                                class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box"> <img
+                            src="https://www.freepnglogos.com/uploads/mastercard-png/file-mastercard-logo-svg-wikimedia-commons-4.png"
+                            alt=""> </div>
+                    <div class="number"> <label class="fw-bold">**** **** **** 1060</label> </div>
+                    <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry
+                                date:</span><span>10/16</span></small> <small><span
+                                class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box"> <img
+                            src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png"
+                            alt=""> </div>
+                    <div class="number"> <label class="fw-bold">**** **** **** 1060</label> </div>
+                    <div class="d-flex align-items-center justify-content-between"> <small><span class="fw-bold">Expiry
+                                date:</span><span>10/16</span></small> <small><span
+                                class="fw-bold">Name:</span><span>Kumar</span></small> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div align="center">
+            
+        <div id="payment_gateway">
+
+            <div class="container py-5">
+                <!-- For demo purpose -->
+                <div class="row mb-4">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h1 class="display-6" style="color: black;">Payment Gateway</h1>
+                    </div>
+                </div> <!-- End -->
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="card ">
+                            <div class="card-header">
+                                <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                                    <!-- Credit card form tabs -->
+                                    <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
+                                        <li class="nav-item"> <a data-toggle="pill" href="#credit-card"
+                                                class="nav-link active "> <i class="fas fa-credit-card mr-2"></i>
+                                                Credit Card </a> </li>
+                                        <li class="nav-item"> <a data-toggle="pill" href="#paypal"
+                                                class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a>
+                                        </li>
+                                        <li class="nav-item"> <a data-toggle="pill" href="#upi" class="nav-link ">
+                                                <i class="fab fa-paypal mr-2"></i>Upi</a> </li>
+                                        <li class="nav-item"> <a data-toggle="pill" href="#net-banking"
+                                                class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net
+                                                Banking </a> </li>
+                                    </ul>
+                                </div> <!-- End -->
+                                <!-- Credit card form content -->
+                                <div class="tab-content">
+                                    <!-- credit card info-->
+                                    <div id="credit-card" class="tab-pane fade show active pt-3">
+                                        <form role="form" onsubmit="event.preventDefault()">
+                                            <div class="form-group"> <label for="username">
+                                                    <h6>Card Owner</h6>
+                                                </label> <input type="text" name="username"
+                                                    placeholder="Card Owner Name" required class="form-control ">
+                                            </div>
+                                            <div class="form-group"> <label for="cardNumber">
+                                                    <h6>Card number</h6>
+                                                </label>
+                                                <div class="input-group"> <input type="text" name="cardNumber"
+                                                        placeholder="Valid card number" class="form-control "
+                                                        required>
+                                                    <div class="input-group-append"> <span
+                                                            class="input-group-text text-muted"> <i
+                                                                class="fab fa-cc-visa mx-1"></i> <i
+                                                                class="fab fa-cc-mastercard mx-1"></i> <i
+                                                                class="fab fa-cc-amex mx-1"></i> </span> </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-8">
+                                                    <div class="form-group"> <label><span class="hidden-xs">
+                                                                <h6>Expiration Date</h6>
+                                                            </span></label>
+                                                        <div class="input-group"> <input type="number"
+                                                                placeholder="MM" name="" class="form-control"
+                                                                required> <input type="number" placeholder="YY"
+                                                                name="" class="form-control" required> </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group mb-4"> <label data-toggle="tooltip"
+                                                            title="Three digit CV code on the back of your card">
+                                                            <h6>CVV <i class="fa fa-question-circle d-inline"></i>
+                                                            </h6>
+                                                        </label> <input type="text" required class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer"> <button type="button"
+                                                    class="subscribe btn btn-primary btn-block shadow-sm"
+                                                    onclick="c_payment()"> Confirm Payment </button>
+                                        </form>
+                                    </div>
+                                </div> <!-- End -->
+                                <!-- Paypal info -->
+                                <div id="paypal" class="tab-pane fade pt-3">
+                                    <h6 class="pb-2">Select your paypal account type</h6>
+                                    <div class="form-group "> <label class="radio-inline"> <input type="radio"
+                                                name="optradio" checked> Domestic </label> <label
+                                            class="radio-inline"> <input type="radio" name="optradio"
+                                                class="ml-5">International </label></div>
+                                    <p> <button type="button" class="btn btn-primary "><i
+                                                class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
+                                    <p class="text-muted"> Note: After clicking on the button, you will be directed
+                                        to a secure gateway for payment. After completing the payment process, you
+                                        will be redirected back to the website to view details of your order. </p>
+                                </div> <!-- End -->
+                                <!-- bank transfer info -->
+                                <div id="upi" class="tab-pane fade pt-3">
+                                    <h6 class="pb-2">Enter Your Upi Below</h6>
+                                    <div class="form-group "> <label class="input-group-text"> <input type="text"
+                                                name="upi" placeholder="Example:hacker@ybl"></label></div>
+                                    <div class="card-footer"> <button type="button"
+                                            class="subscribe btn btn-primary btn-block shadow-sm"
+                                            onclick="payment1()"> Confirm Payment </button></div>
+                                            
+                                    <p class="text-muted"> Note: After clicking on the button, you will be directed
+                                        to a secure gateway for payment. After completing the payment process, you
+                                        will be redirected back to the website to view details of your order. </p>
+                                </div>
+                                <div id="net-banking" class="tab-pane fade pt-3">
+                                    <div class="form-group "> <label for="Select Your Bank">
+                                            <h6>Select your Bank</h6>
+                                        </label> <select class="form-control" id="ccmonth">
+                                            <option value="" selected disabled>--Please select your Bank--</option>
+                                            <option>AXIS BANK</option>
+                                            <option>BANK OF MAHARASHTRA</option>
+                                            <option>CENTRAL BANK OF INDIA</option>
+                                            <option>HDFC BANK</option>
+                                            <option>ICICI BANK </option>
+                                            <option>CANERA BANK</option>
+                                            <option>PUNJAB NATIONAL BANK</option>
+                                            <option>KOTAK MAHINDRA BANK</option>
+                                            <option>STATE BANK OF INDIA</option>
+                                            <option>INDUSLAND BANK</option>
+                                        </select> </div>
+                                    <div class="form-group">
+                                        <p> <button type="button" class="btn btn-primary "><i
+                                                    class="fas fa-mobile-alt mr-2"></i> Proceed Payment</button>
+                                        </p>
+                                    </div>
+                                    <p class="text-muted">Note: After clicking on the button, you will be directed
+                                        to a secure gateway for payment. After completing the payment process, you
+                                        will be redirected back to the website to view details of your order. </p>
+                                </div> <!-- End -->
+                                <!-- End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                   
+                            
+       
+</body>
+
+<script>
+
+function c_payment(){
+    Email.send({
+        Host: "smtp.gmail.com",
+        Username: "foodhubonlinebook@gmail.com",
+        Password: "foodhub@123",
+        To: 'jvasu015@gmail.com',
+        From: "foodhubonlinebook@gmail.com",
+        Subject: "Restro Hub Food Order",
+        Body: 'Your Order Has Been Placed Successfully.. \t \n You Ordered Below Items: \n\n 1) DOUBLE CHEESE BURGER - 1      180rs \n 2)MANCHURIAN NOODLES -1     200rs \n Total      380rs \n Thank You For Choosing Our Poratal to Get Delicious Food \n\n  Regards, \n Restro Hud \n\n For The More Queries Contact : foodhubonlinebook@gmail.com',
+      })
+        .then(function (message) {
+            alert("Your Order Details Has been Sent to Your Mail")
+        });
+}	
+
+
+function payment1(){
+    Email.send({
+        Host: "smtp.gmail.com",
+        Username: "foodhubonlinebook@gmail.com",
+        Password: "foodhub@123",
+        To: 'jvasu015@gmail.com',
+        From: "foodhubonlinebook@gmail.com",
+        Subject: "Restro Hub Food Order",
+        Body: 'Your Order Has Been Placed Successfully.. \t \n You Ordered Below Items: \n\n 1) DOUBLE CHEESE BURGER - 1      180rs \n 2)MANCHURIAN NOODLES -1     200rs \n Total      380rs \n Thank You For Choosing Our Poratal to Get Delicious Food \n\n  Regards, \n Restro Hud \n\n For The More Queries Contact : foodhubonlinebook@gmail.com',
+      })
+        .then(function (message) {
+            alert("Your Order Details Has been Sent to Your Mail")
+        });
+}	
+</script>
+
+
+</html>

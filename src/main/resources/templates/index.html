@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+          
+ <title>LIST_OF_RESTAURANTS</title>
+ 
+<style>
+
+form{
+    width:100vw;
+    margin: bottom;
+    display: flex;
+    justify-content: space-between;
+    border: 8px solid #212529;
+    background-color: #212529;
+    
+}
+
+marquee{
+    font-weight: 800;
+    word-spacing: 10px;
+    letter-spacing: 4px;
+}
+
+.sec div {
+  height: 230px;
+  width: 480px;
+  margin: auto;
+}
+
+sec{
+  perspective: 600px;
+}
+
+
+.side-a,
+.side-b {
+  
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.side-a {
+
+  z-index: 1;
+}
+.side-b {
+  background-color: #212529;
+  transform: rotateY(180deg);
+  padding: 16px;
+  color: #f8f9fa;
+  border: 2px solid #ffff;
+    border-radius: 20px;
+    padding: 10px;
+  
+}
+
+.side-b h2 {
+  text-align: center;
+}
+
+.side-a img {
+  height: 230px;
+  width: 480px;
+}
+
+.wrap {
+  transition: .5s;
+  transform-style: preserve-3d;
+}
+
+.wrap:hover {
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+.nav-item{
+    border: 3px solid #e5e5e5;
+    border-radius: 20px;
+    margin-left: 5px;
+    font-size: 1rem;
+}
+.nav-item:hover{
+    transform: scale(.95);
+    border: 4px solid #ffafcc;
+}
+
+
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.jpg}"  src="../static/images/logo.jpg" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center" style="background-image: url('https://media.istockphoto.com/vectors/chocolate-vector-template-vintage-background-vector-id1176792195?b=1&k=20&m=1176792195&s=612x612&w=0&h=aqsvtbT-9tKTvmxuf4vr5LXVz2VwbFEuGgcV32kTI-Y='); color: #ffff; font-size:large; font-weight: 800;">
+    <h1 class="display-4">RESTRO_HUB</h1>
+    <marquee>Discover The Best Restaurants For Best
+        Quality Of Food And Drinks</marquee>
+</div>
+
+
+<form>
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img1.jpg}" src="../static/images/img1.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>Starbucks</h2>
+                <p>Starbucks Corporation is an American multinational chain of coffeehouses and roastery reserves headquartered in Seattle, Washington. It is the world's largest coffeehouse chain. As of November 2021, the company had 33,833 stores in 80 countries, 15,444 of which were located in the United States.</p>    
+            </div>
+        </div>
+    </section>
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img2.jpg}" src="../static/images/img2.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>KFC</h2>
+                <p>KFC is an American fast food restaurant chain headquartered in Louisville, Kentucky that specializes in fried chicken. It is the world's second-largest restaurant chain after McDonald's, with 22,621 locations globally in 150 countries as of December 2019. The chain is a subsidiary of Yum!</p>    
+            </div>
+        </div>
+    </section>
+     
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img3.jpg}" src="../static/images/img3.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>Mc Donald's</h2>
+                <p>McDonald's is an American multinational fast food corporation, founded in 1940 as a restaurant operated by Richard and Maurice McDonald, in San Bernardino, California, United States.Come and have a fresh bite and immerge yourself in tasty delight with our wide range of products</p>   
+            </div>
+        </div>
+    </section>
+</form>
+
+<form>
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img4.jpg}" src="../static/images/img4.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>Domino's</h2>
+                <p>Domino's Pizza, Inc., doing business as Domino's, is an American multinational pizza restaurant chain founded in 1960 and led by CEO Richard Allison. The corporation is Delaware domiciled and headquartered at the Domino's Farms Office Park in Ann Arbor, Michigan.</p>   
+            </div>
+        </div>
+    </section>
+     
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img5.jpg}" src="../static/images/img5.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>Pizza Hut</h2>
+                <p>Pizza Hut is an American multinational restaurant chain and international franchise founded in 1958 in Wichita, Kansas by Dan and Frank Carney. They serve their signature pan pizza and other dishes including pasta, breadsticks and desserts.</p>
+            </div>
+        </div>
+    </section>
+    <section class="sec">
+        <div class="wrap">
+            <div class="side-a">
+                <img th:src="@{/images/img6.jpg}" src="../static/images/img6.jpg" alt="">
+            </div>
+            <div class="side-b">
+                <h2>Baskin Robbins</h2>
+                <p>Baskin-Robbins is an American multinational chain of ice cream and cake specialty shop restaurants owned by Inspire Brands. Based in Canton, Massachusetts, Baskin-Robbins was founded in 1945 by Burt Baskin and Irv Robbins in Glendale, California.</p>   
+            </div>
+        </div>
+    </section>
+</form>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
